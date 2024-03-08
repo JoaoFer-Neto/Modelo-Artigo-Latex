@@ -1,0 +1,97 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{jn_style}[2024/02/28]
+
+% \RequirePackage[grid]{eso-pic}
+\usepackage{lipsum}
+
+% Pacotes utilizados
+\RequirePackage{times}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[brazil]{babel}
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{fontawesome5}
+\RequirePackage{graphicx}
+\graphicspath{ {./imagens/} }
+\RequirePackage{subcaption,float}
+\RequirePackage{anyfontsize}
+\RequirePackage{t1enc}
+\RequirePackage{multicol}
+\RequirePackage{multirow}
+\RequirePackage{xcolor}
+\RequirePackage{wrapfig}
+\RequirePackage{import}
+\RequirePackage{url}
+
+% % Pacotes Matematicos
+\RequirePackage{amsmath}
+\RequirePackage{algorithm}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{amsfonts}
+
+% Configuração de referências
+\RequirePackage[alf,abnt-emphasize = bf,abnt-etal-list = 3]{abntex2cite}
+\uppercase\addto\captionsbrazil{\renewcommand{\refname}{Referências}}
+
+% Formatação estilo ABNT
+\RequirePackage[a4paper,top=3.0cm,left=3.0cm, right=2.0cm, bottom=2.0cm]{geometry}
+
+% Configuração de numeração de pagina
+\setcounter{page}{1}
+\pagestyle{myheadings}
+\let\oldthepage\thepage
+\renewcommand*\thepage{\footnotesize{\oldthepage}}
+
+% Formatação de titulos
+\RequirePackage[tiny]{titlesec}
+\titleformat{\section}[block]{\bfseries \fontsize{14pt}{0pt}\selectfont }{\thesection. }{0em}{\uppercase}
+
+% Formatação de paragrafo
+\RequirePackage{setspace}
+\onehalfspacing
+\RequirePackage{indentfirst}
+\RequirePackage[parfill]{parskip}
+\setlength{\parindent}{1.25cm}
+
+% Comando que adiciona contador de questão
+\newcounter{questaocounter} % contador para as questões
+\newcommand{\questao}{%
+    \stepcounter{questaocounter}% Incrementa o contador de questões
+    \textbf{Questão \thequestaocounter.} % Formato da questão
+}
+
+% Comando que adiciona icone de email.
+\newcommand{\email}[1]{%
+  \href{mailto:#1}{%
+    \faIcon[regular]{envelope} E-mail: {#1}%
+  }%
+}%
+
+% Comando para adicionar titulo e autor. 
+\newenvironment{titulo}[4]{
+  \begin{center}
+    \textbf{\uppercase{#1}}
+  \end{center}
+  \vspace{1.2cm}
+  \begin{flushright}
+    \textbf{#2. \footnote{#3. \email{#4}.}}
+}{\end{flushright}}
+
+% Comando para adicionar titulo e autor para duplas
+\newenvironment{tituloT}[7]{
+  \begin{center}
+    \textbf{\uppercase{#1}}
+  \end{center}
+  \vspace{1.2cm}
+  \begin{flushright}
+    \textbf{#2. \footnote{#3. \email{#4}.}}
+    \\
+    \textbf{#5. \footnote{#6. \email{#7}.}}\hspace{-0.1cm}
+}{\end{flushright}}
+
+\newenvironment{quest}[1]{
+  \noindent
+  \stepcounter{questaocounter}% Incrementa o contador de questões
+  \textbf{Questão \thequestaocounter. #1} % Formato da questão
+}{\vspace{12pt} \hrule}
